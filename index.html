@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI SNS 마케팅 랜딩 페이지</title>
+    <style>
+      /* 디자인 시스템 (staticweb.mdc 준수) */
+      :root {
+        /* Colors */
+        --primary: #5D7373;
+        --secondary: #F2B6A0;
+        --accent-1: #D96D55;
+        --accent-2: #591812;
+        --dark: #261E17;
+        --gradient-main: linear-gradient(135deg, #5D7373, #F2B6A0, #D96D55);
+        --gradient-cta: linear-gradient(90deg, #D96D55, #591812);
+        --gradient-soft: linear-gradient(180deg, rgba(93, 115, 115, 0.1), rgba(242, 182, 160, 0.1));
+        --white: #FFFFFF;
+        --light-gray: #F5F5F5;
+        --mid-gray: #E0E0E0;
+        --text-primary: var(--dark);
+        --text-secondary: #666666;
+
+        /* Typography */
+        --font-primary: system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+        --font-display: 'Montserrat', system-ui, sans-serif;
+        --fs-hero: clamp(2.2rem, 5vw, 3.5rem);
+        --fs-h1: clamp(1.8rem, 3.5vw, 2.5rem);
+        --fs-h2: clamp(1.4rem, 3vw, 2rem);
+        --fs-h3: clamp(1.1rem, 2vw, 1.35rem);
+        --fs-body: 1rem;
+        --fs-small: 0.875rem;
+        --lh-tight: 1.2;
+        --lh-normal: 1.6;
+        --lh-relaxed: 1.8;
+
+        /* Spacing */
+        --spacing-xs: 0.5rem;
+        --spacing-sm: 1rem;
+        --spacing-md: 2rem;
+        --spacing-lg: 3rem;
+        --spacing-xl: 5rem;
+        --spacing-2xl: 8rem;
+
+        /* Surfaces */
+        --surface: #ffffff;
+        --background: #f9fafb;
+        --border: #e5e7eb;
+      }
+      body {
+        margin: 0;
+        font-family: var(--font-primary);
+        background: var(--background);
+        color: var(--text-primary);
+        line-height: var(--lh-normal);
+      }
+      .container {
+        width: 100%;
+        max-width: 1080px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+      :focus-visible {
+        outline: 3px solid var(--secondary);
+        outline-offset: 3px;
+      }
+      header.header {
+        background: var(--white);
+        border-bottom: 1px solid var(--border);
+        position: sticky;
+        top: 0;
+        z-index: 10;
+      }
+      nav.nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 64px;
+      }
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: 700;
+        color: var(--dark);
+        font-size: 16px;
+        text-decoration: none;
+      }
+      .brand__badge {
+        width: 28px;
+        height: 28px;
+        border-radius: 6px;
+        background: var(--primary);
+        display: inline-block;
+      }
+      .nav__links {
+        display: flex;
+        gap: 16px;
+        align-items: center;
+      }
+      .nav__link {
+        text-decoration: none;
+        color: var(--text-secondary);
+        font-size: 14px;
+        padding: 8px 10px;
+        border-radius: 6px;
+      }
+      .nav__link:hover {
+        background: #edf2f7;
+        color: var(--text-primary);
+      }
+      .nav__cta { margin-left: 8px; }
+
+      .hero {
+        padding: 72px 0 56px;
+        text-align: center;
+        background: var(--gradient-soft);
+        border-bottom: 1px solid var(--border);
+      }
+      .hero h1 {
+        margin: 0 0 12px;
+        font-size: var(--fs-hero);
+        line-height: var(--lh-tight);
+        font-family: var(--font-display);
+        color: var(--dark);
+      }
+      .hero p {
+        margin: 0 auto 24px;
+        max-width: 680px;
+        color: var(--text-secondary);
+        line-height: 1.6;
+      }
+      .btn {
+        display: inline-block;
+        padding: 12px 18px;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        text-decoration: none;
+        transition: transform 0.08s ease-in-out, opacity 0.2s, background 0.3s ease;
+        font-weight: 600;
+      }
+      .btn--primary { background: var(--gradient-cta); color: var(--white); }
+      .btn--primary:hover { opacity: 0.95; }
+      .btn--ghost { background: transparent; color: var(--accent-1); border: 1px solid var(--accent-1); }
+      .btn--ghost:hover { background: rgba(217,109,85,0.06); }
+      .btn:active { transform: translateY(1px); }
+
+      section.section { padding: 48px 0; }
+      .section__title {
+        margin: 0 0 8px;
+        font-size: var(--fs-h2);
+        text-align: center;
+        font-family: var(--font-display);
+      }
+      .section__desc {
+        margin: 0 auto 24px;
+        max-width: 680px;
+        color: var(--text-secondary);
+        text-align: center;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+      @media (min-width: 769px) {
+        .grid { grid-template-columns: repeat(3, 1fr); }
+      }
+      .card {
+        background: var(--white);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 16px;
+        box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+      }
+      .card h3 { margin: 0 0 6px; font-size: var(--fs-h3); }
+      .card p { margin: 0; color: var(--text-secondary); line-height: 1.6; }
+
+      .services__icon {
+        width: 36px; height: 36px; border-radius: 8px; background: var(--primary);
+        display: inline-block; margin-bottom: 10px;
+      }
+
+      .features { display: grid; grid-template-columns: 1fr; gap: 20px; align-items: center; }
+      @media (min-width: 1025px) { .features { grid-template-columns: 1fr 1fr; } }
+      .features__media { min-height: 220px; background: var(--gradient-main); border-radius: 12px; }
+      .features__list { display: grid; gap: 12px; }
+
+      .stats { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; text-align: center; }
+      @media (min-width: 769px) { .stats { grid-template-columns: repeat(4, 1fr); } }
+      .stat__value { font-size: 1.6rem; font-weight: 800; color: var(--accent-2); }
+      .stat__label { color: var(--text-secondary); font-size: var(--fs-small); }
+
+      .testimonials__item { background: var(--white); border: 1px solid var(--border); border-radius: 12px; padding: 16px; }
+      .testimonials__author { margin-top: 8px; color: var(--text-secondary); font-size: var(--fs-small); }
+
+      .pricing { display: grid; grid-template-columns: 1fr; gap: 16px; }
+      @media (min-width: 769px) { .pricing { grid-template-columns: repeat(3, 1fr); } }
+      .price-card { border: 1px solid var(--border); border-radius: 12px; background: var(--white); padding: 18px; }
+      .price-card--recommended { border-color: var(--accent-1); box-shadow: 0 4px 14px rgba(217,109,85,0.15); }
+      .price__value { font-size: 1.8rem; font-weight: 800; color: var(--dark); }
+      .price__features { margin: 10px 0 14px; color: var(--text-secondary); }
+
+      .cta { background: var(--gradient-soft); border: 1px solid var(--border); border-radius: 12px; padding: 20px; text-align: center; }
+      .form { display: grid; grid-template-columns: 1fr; gap: 10px; }
+      @media (min-width: 769px) { .form { grid-template-columns: 2fr 1fr; } }
+      .input { height: 44px; border: 1px solid var(--mid-gray); border-radius: 8px; padding: 0 12px; font-size: 14px; }
+
+      footer.footer {
+        border-top: 1px solid var(--border);
+        background: var(--white);
+        color: var(--text-secondary);
+        font-size: 14px;
+      }
+      .footer-inner { height: 64px; display: flex; align-items: center; justify-content: space-between; }
+
+      .mt-sm { margin-top: var(--spacing-sm); }
+      .mt-md { margin-top: var(--spacing-md); }
+      .mt-lg { margin-top: var(--spacing-lg); }
+      .mt-xl { margin-top: var(--spacing-xl); }
+      .text-center { text-align: center; }
+      .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+    </style>
+  </head>
+  <body>
+    <header class="header" role="banner">
+      <div class="container">
+        <nav class="nav" aria-label="주요">
+          <a class="brand" href="#">
+            <span class="brand__badge" aria-hidden="true"></span>
+            SimpleSite
+          </a>
+          <div class="nav__links" role="navigation">
+            <a class="nav__link" href="#services">서비스</a>
+            <a class="nav__link" href="#features">기능</a>
+            <a class="nav__link" href="#pricing">가격</a>
+            <a class="nav__link" href="#testimonials">고객사례</a>
+            <a class="btn btn--primary nav__cta" href="#cta">무료 상담 신청</a>
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="container">
+          <h1>AI로 시작하는<br />스마트한 SNS 마케팅</h1>
+          <p>AI 기술로 마케팅 비용은 50% 절감하고,<br />단 3일 만에 캠페인을 시작하세요</p>
+          <div class="mt-sm">
+            <a class="btn btn--primary" href="#cta" id="get-started">무료 상담 신청하기</a>
+            <a class="btn btn--ghost" href="#features" style="margin-left:8px;">자세히 보기</a>
+          </div>
+          <p class="section__desc mt-sm" aria-label="신뢰 배지">
+            ✅ 100+ 기업이 선택한&nbsp;&nbsp;|&nbsp;&nbsp;💼 비용 50% 절감&nbsp;&nbsp;|&nbsp;&nbsp;⚡ 3일 빠른 시작&nbsp;&nbsp;|&nbsp;&nbsp;📈 AI 최적화
+          </p>
+        </div>
+      </section>
+
+      <section id="services" class="section">
+        <div class="container">
+          <h2 class="section__title">AI 마케팅 서비스</h2>
+          <p class="section__desc">핵심 장점을 한눈에 확인하세요.</p>
+          <div class="grid">
+            <article class="card services__card">
+              <i class="services__icon" aria-hidden="true" title="비용 절감">💰</i>
+              <h3>비용 50% 절감</h3>
+              <p>AI 자동화로 인건비와<br />운영 비용을 대폭 절감합니다</p>
+            </article>
+            <article class="card services__card">
+              <i class="services__icon" aria-hidden="true" title="빠른 시작">⚡</i>
+              <h3>3일 안에 시작</h3>
+              <p>일주일 기다릴 필요 없이<br />3일 만에 마케팅을 시작합니다</p>
+            </article>
+            <article class="card services__card">
+              <i class="services__icon" aria-hidden="true" title="AI 최적화">🎯</i>
+              <h3>AI 기반 최적화</h3>
+              <p>데이터 기반 인사이트로<br />최고의 성과를 만들어냅니다</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="features" class="section">
+        <div class="container">
+          <h2 class="section__title">포미서비스만의<br />AI 마케팅 솔루션</h2>
+          <p class="section__desc">AI 기술로 마케팅의 모든 단계를 자동화합니다.</p>
+          <div class="features">
+            <div class="features__media" role="img" aria-label="AI 마케팅 시각화 이미지"></div>
+            <div class="features__list">
+              <article class="card">
+                <h3>AI 콘텐츠 생성</h3>
+                <p>브랜드 톤앤매너에 맞는<br />고품질 콘텐츠를 자동으로 생성합니다</p>
+              </article>
+              <article class="card">
+                <h3>스마트 스케줄링</h3>
+                <p>AI가 타겟 고객의 활동 패턴을 분석해<br />가장 효과적인 시간에 게시합니다</p>
+              </article>
+              <article class="card">
+                <h3>실시간 성과 분석</h3>
+                <p>캠페인 성과를 실시간으로 추적하고<br />AI가 자동으로 개선 방안을 제안합니다</p>
+              </article>
+              <article class="card">
+                <h3>정밀 타겟팅</h3>
+                <p>AI 데이터 분석으로<br />정확한 타겟 고객에게 도달합니다</p>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="stats" class="section">
+        <div class="container">
+          <h2 class="section__title">성과 지표</h2>
+          <p class="section__desc">숫자로 입증된 결과를 확인하세요.</p>
+          <div class="stats">
+            <div>
+              <div class="stat__value" data-counter="120">0</div>
+              <div class="stat__label">고객사</div>
+            </div>
+            <div>
+              <div class="stat__value" data-counter="350">0</div>
+              <div class="stat__label">캠페인</div>
+            </div>
+            <div>
+              <div class="stat__value" data-counter="48">0</div>
+              <div class="stat__label">월 평균 리드</div>
+            </div>
+            <div>
+              <div class="stat__value" data-counter="3.2">0</div>
+              <div class="stat__label">평균 ROAS 배</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="testimonials" class="section">
+        <div class="container">
+          <h2 class="section__title">고객들의<br />성공 스토리</h2>
+          <p class="section__desc">고객이 직접 경험한 변화를 확인하세요.</p>
+          <div class="grid">
+            <blockquote class="testimonials__item">
+              ⭐⭐⭐⭐⭐<br />
+              "기존 업체 대비 비용은 절반인데<br />
+              성과는 오히려 더 좋아졌어요.<br />
+              빠른 시작도 정말 만족스럽습니다."
+              <div class="testimonials__author">김○○ 대표 | 뷰티 브랜드</div>
+            </blockquote>
+            <blockquote class="testimonials__item">
+              ⭐⭐⭐⭐⭐<br />
+              "3일 만에 캠페인을 시작할 수 있다는 게<br />
+              정말 놀라웠습니다. AI 자동화 덕분에<br />
+              운영도 훨씬 편해졌어요."
+              <div class="testimonials__author">이○○ 마케터 | IT 스타트업</div>
+            </blockquote>
+            <blockquote class="testimonials__item">
+              ⭐⭐⭐⭐⭐<br />
+              "예산이 부족해 고민이었는데<br />
+              포미서비스로 합리적인 비용에<br />
+              전문적인 마케팅이 가능해졌습니다."
+              <div class="testimonials__author">박○○ 대표 | 패션 쇼핑몰</div>
+            </blockquote>
+          </div>
+        </div>
+      </section>
+
+      <section id="pricing" class="section">
+        <div class="container">
+          <h2 class="section__title">합리적인 비용으로<br />최고의 효율을 경험하세요</h2>
+          <p class="section__desc">기존 업체 대비 확실한 차이를 비교해 보세요.</p>
+          <div class="card" role="table" aria-label="가격 및 기능 비교표">
+            <div role="rowgroup">
+              <div role="row" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;font-weight:700;">
+                <div role="columnheader">구분</div>
+                <div role="columnheader">기존 마케팅 업체</div>
+                <div role="columnheader">포미서비스</div>
+              </div>
+            </div>
+            <div role="rowgroup" class="mt-sm" style="display:grid;gap:8px;">
+              <div role="row" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;">
+                <div role="cell">비용</div>
+                <div role="cell">월 200만원~</div>
+                <div role="cell">월 100만원~ <span aria-label="50% 절감 배지" style="color:var(--accent-1);font-weight:700;">(50% 절감)</span></div>
+              </div>
+              <div role="row" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;">
+                <div role="cell">시작까지 소요 시간</div>
+                <div role="cell">평균 7일</div>
+                <div role="cell">단 3일 <span aria-label="2배 이상 빠름" style="color:var(--accent-1);font-weight:700;">(2배 이상 빠름)</span></div>
+              </div>
+              <div role="row" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;">
+                <div role="cell">콘텐츠 제작</div>
+                <div role="cell">수동 작업</div>
+                <div role="cell">AI 자동 생성</div>
+              </div>
+              <div role="row" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;">
+                <div role="cell">성과 분석</div>
+                <div role="cell">주간/월간 리포트</div>
+                <div role="cell">실시간 대시보드</div>
+              </div>
+              <div role="row" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;">
+                <div role="cell">운영 방식</div>
+                <div role="cell">담당자 배정</div>
+                <div role="cell">AI + 전문가</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="process" class="section">
+        <div class="container">
+          <h2 class="section__title">간단한 4단계로<br />마케팅을 시작하세요</h2>
+          <div class="grid">
+            <article class="card">
+              <h3>01. 상담 신청</h3>
+              <p>간단한 정보 입력으로<br />무료 상담을 신청하세요</p>
+            </article>
+            <article class="card">
+              <h3>02. 전략 수립</h3>
+              <p>AI 분석을 통해<br />맞춤형 마케팅 전략을 설계합니다</p>
+            </article>
+            <article class="card">
+              <h3>03. 캠페인 시작</h3>
+              <p>단 3일 만에<br />본격적인 마케팅을 시작합니다</p>
+            </article>
+            <article class="card">
+              <h3>04. 성과 확인</h3>
+              <p>실시간 대시보드로<br />성과를 확인하고 최적화합니다</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="cta" class="section">
+        <div class="container">
+          <div class="cta" role="form" aria-labelledby="cta-title">
+            <h2 id="cta-title" class="section__title">지금 시작하면<br />3일 후 성과를 확인할 수 있습니다</h2>
+            <p class="section__desc">무료 상담으로 우리 브랜드에 맞는 AI 마케팅 전략을 확인해보세요</p>
+            <a class="btn btn--primary" href="mailto:contact@formeai.com">contact@formeai.com</a>
+            <p class="section__desc mt-sm">✉️ 이메일 문의: contact@formeai.com<br />24시간 이내 답변 드립니다</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer id="contact" class="footer" role="contentinfo">
+      <div class="container footer-inner">
+        <div>
+          <strong>포미서비스 FORMEAI</strong><br />
+          AI 기반 SNS 마케팅 솔루션<br />
+          📧 contact@formeai.com
+        </div>
+        <div>
+          <a class="nav__link" href="privacy.html" aria-label="개인정보처리방침">개인정보처리방침</a>
+          <a class="nav__link" href="#" aria-label="이용약관">이용약관</a>
+        </div>
+      </div>
+      <div class="container" style="padding:12px 20px; border-top:1px solid var(--border); text-align:center;">
+        © 2024 FORMEAI. All rights reserved.
+      </div>
+    </footer>
+
+    <script>
+      // DOMContentLoaded 이후 실행
+      document.addEventListener('DOMContentLoaded', function () {
+        // 간단한 카운터 애니메이션
+        const counters = document.querySelectorAll('[data-counter]');
+        const easeOutCubic = (t) => 1 - Math.pow(1 - t, 3);
+        counters.forEach((el) => {
+          const target = parseFloat(el.getAttribute('data-counter') || '0');
+          const isFloat = !Number.isInteger(target);
+          const duration = 1200;
+          const start = performance.now();
+          function tick(now) {
+            const p = Math.min(1, (now - start) / duration);
+            const value = target * easeOutCubic(p);
+            el.textContent = isFloat ? value.toFixed(1) : Math.round(value).toString();
+            if (p < 1) requestAnimationFrame(tick);
+          }
+          requestAnimationFrame(tick);
+        });
+      });
+    </script>
+  </body>
+  </html>
